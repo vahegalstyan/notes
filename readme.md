@@ -58,14 +58,17 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-Installation
+##Installation
 
 composer install
+
 php artisan migrate
 
 php artisan passport:install
 
 php artisan db:seed --class=UsersTableSeeder
+
+
 
 //create password grant client
 
@@ -73,33 +76,33 @@ php artisan passport:client --password
 
 //remember client id and client secret for future requests
 
-//login request change client id and client secret to yourse
+##Request Examples
 
-curl -X POST \
-  http://notes.loc/oauth/token \
-  -H 'cache-control: no-cache' \
-  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
-  -H 'postman-token: ba49c0cc-fde9-5f76-7f47-186c1632bc84' \
-  -F grant_type=password \
-  -F client_id=3 \
-  -F client_secret=kll1pXQIC45BisOdRHHVxs2Fyz3jRf4FUEFAv0Mq \
-  -F username=test@gmail.com \
-  -F password=secretsecret \
-  -F 'scope=*'
+//login request change client id and client secret to yours
+
+    curl -X POST \
+      http://notes.loc/oauth/token \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+      -H 'postman-token: ba49c0cc-fde9-5f76-7f47-186c1632bc84' \
+      -F grant_type=password \
+      -F client_id=3 \
+      -F client_secret=kll1pXQIC45BisOdRHHVxs2Fyz3jRf4FUEFAv0Mq \
+      -F username=test@gmail.com \
+      -F password=secretsecret \
+      -F 'scope=*'
   
-  
-  
-  //create note
-  
-  curl -X POST \
-    http://notes.loc/api/notes \
-    -H 'accept: application/json' \
-    -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFiZDM4ZWUxM2IzOTkwZDQ2ZjFmOGIzOWU4MmZiMzNmYTM1MjlkMzI4Yjk2ZTRkYTc5ZjIyN2Q4YTQ2M2UyZWFkODBlY2E0ZDUxMTJlNDg2In0.eyJhdWQiOiIxIiwianRpIjoiYWJkMzhlZTEzYjM5OTBkNDZmMWY4YjM5ZTgyZmIzM2ZhMzUyOWQzMjhiOTZlNGRhNzlmMjI3ZDhhNDYzZTJlYWQ4MGVjYTRkNTExMmU0ODYiLCJpYXQiOjE1MjMzODM4ODUsIm5iZiI6MTUyMzM4Mzg4NSwiZXhwIjoxNTU0OTE5ODg1LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.jXgMWWNq8DZ2VDqQcH--GIwh6ISycIu2tSPOpm3uEeTxkT_QlHfj1RNMpPUxN86IKa6Equn-IwtG70IVML1lo7-b5UCCk420aWS5SFxCD_qevOURk50wrYOJqxgW-BXVUCOwHf__T3AeZ_nY86MLRp9816XRY29wv519yJQXA2K57x3iRKZxlyzSXVni-sd7ZH0WcVQbqWBf-Zmepkh9x-gpVIN1bkGmxnNEuyFPB3CuE6R1HeUoRKUZ_m7x_Vi6IdiLKtEZ-FjcpJKt2nV2N4nqa0_A1L4V-Xy1JLkVW7U96eGaDWVxCBDwpksdmKzVB1FYUwYQkY1fMj_B_kwc9vXmcVm92HFCMqXePM5qWJOwze23hHFYTOZ0gP7K01_MFI5Ibb4iNoLcAwtxMpxTycJTfi763W06MpFID4ILcj2LRD09sRB_upIEUV5OeaKSND12F5q0Qpw0vWxbI2XIU7ksodymFpdCHcTl52wEi8M0rTizwiM5NGltBPSgK_e1UWE-Kzm_PnPxdv-jNnNWAhBW-03B_HNURU0UP8p6a_oB3S1-W2TyLxC9D20XEm5hby7VHGyJptbQP-lYG9sMOgl4h_RZPLZtpLuC509XLjGR_SAL-YX5ZuQhT8N_nmEQ4_N8empTE6uMUhpXv7BuQv9-R3-jpvtdb6OzuQ7Xxso' \
-    -H 'cache-control: no-cache' \
-    -H 'content-type: application/x-www-form-urlencoded' \
-    -H 'postman-token: 5597bd28-33e3-5c91-b095-0085ecb6ba03' \
-    -d 'title=sdasd&note=asdsadasdadasdasdasdasdasd%20asd%20asdas%20da%20asd%20asd%20asdasd%20as%20dasd%20asd%20'
-    
+      //create note
+      
+      curl -X POST \
+        http://notes.loc/api/notes \
+        -H 'accept: application/json' \
+        -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFiZDM4ZWUxM2IzOTkwZDQ2ZjFmOGIzOWU4MmZiMzNmYTM1MjlkMzI4Yjk2ZTRkYTc5ZjIyN2Q4YTQ2M2UyZWFkODBlY2E0ZDUxMTJlNDg2In0.eyJhdWQiOiIxIiwianRpIjoiYWJkMzhlZTEzYjM5OTBkNDZmMWY4YjM5ZTgyZmIzM2ZhMzUyOWQzMjhiOTZlNGRhNzlmMjI3ZDhhNDYzZTJlYWQ4MGVjYTRkNTExMmU0ODYiLCJpYXQiOjE1MjMzODM4ODUsIm5iZiI6MTUyMzM4Mzg4NSwiZXhwIjoxNTU0OTE5ODg1LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.jXgMWWNq8DZ2VDqQcH--GIwh6ISycIu2tSPOpm3uEeTxkT_QlHfj1RNMpPUxN86IKa6Equn-IwtG70IVML1lo7-b5UCCk420aWS5SFxCD_qevOURk50wrYOJqxgW-BXVUCOwHf__T3AeZ_nY86MLRp9816XRY29wv519yJQXA2K57x3iRKZxlyzSXVni-sd7ZH0WcVQbqWBf-Zmepkh9x-gpVIN1bkGmxnNEuyFPB3CuE6R1HeUoRKUZ_m7x_Vi6IdiLKtEZ-FjcpJKt2nV2N4nqa0_A1L4V-Xy1JLkVW7U96eGaDWVxCBDwpksdmKzVB1FYUwYQkY1fMj_B_kwc9vXmcVm92HFCMqXePM5qWJOwze23hHFYTOZ0gP7K01_MFI5Ibb4iNoLcAwtxMpxTycJTfi763W06MpFID4ILcj2LRD09sRB_upIEUV5OeaKSND12F5q0Qpw0vWxbI2XIU7ksodymFpdCHcTl52wEi8M0rTizwiM5NGltBPSgK_e1UWE-Kzm_PnPxdv-jNnNWAhBW-03B_HNURU0UP8p6a_oB3S1-W2TyLxC9D20XEm5hby7VHGyJptbQP-lYG9sMOgl4h_RZPLZtpLuC509XLjGR_SAL-YX5ZuQhT8N_nmEQ4_N8empTE6uMUhpXv7BuQv9-R3-jpvtdb6OzuQ7Xxso' \
+        -H 'cache-control: no-cache' \
+        -H 'content-type: application/x-www-form-urlencoded' \
+        -H 'postman-token: 5597bd28-33e3-5c91-b095-0085ecb6ba03' \
+        -d 'title=sdasd&note=asdsadasdadasdasdasdasdasd%20asd%20asdas%20da%20asd%20asd%20asdasd%20as%20dasd%20asd%20'
+        
     //delete note
     
     curl -X DELETE \
@@ -130,4 +133,15 @@ curl -X POST \
           -H 'content-type: application/x-www-form-urlencoded' \
           -H 'postman-token: 4696c3d7-8b81-0483-163f-a2ac341fb25b' \
           -H 'title: bajajajjajaja' \
+          -d 'title=sdasd&note=asdsadasdadasdasdasdasdasd%20asd%20asdas%20da%20asd%20asd%20asdasd%20as%20dasd%20asd%20'
+          
+          //get note by id
+          
+          curl -X GET \
+          http://notes.loc/api/notes/2 \
+          -H 'accept: application/json' \
+          -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFiZDM4ZWUxM2IzOTkwZDQ2ZjFmOGIzOWU4MmZiMzNmYTM1MjlkMzI4Yjk2ZTRkYTc5ZjIyN2Q4YTQ2M2UyZWFkODBlY2E0ZDUxMTJlNDg2In0.eyJhdWQiOiIxIiwianRpIjoiYWJkMzhlZTEzYjM5OTBkNDZmMWY4YjM5ZTgyZmIzM2ZhMzUyOWQzMjhiOTZlNGRhNzlmMjI3ZDhhNDYzZTJlYWQ4MGVjYTRkNTExMmU0ODYiLCJpYXQiOjE1MjMzODM4ODUsIm5iZiI6MTUyMzM4Mzg4NSwiZXhwIjoxNTU0OTE5ODg1LCJzdWIiOiIxIiwic2NvcGVzIjpbIioiXX0.jXgMWWNq8DZ2VDqQcH--GIwh6ISycIu2tSPOpm3uEeTxkT_QlHfj1RNMpPUxN86IKa6Equn-IwtG70IVML1lo7-b5UCCk420aWS5SFxCD_qevOURk50wrYOJqxgW-BXVUCOwHf__T3AeZ_nY86MLRp9816XRY29wv519yJQXA2K57x3iRKZxlyzSXVni-sd7ZH0WcVQbqWBf-Zmepkh9x-gpVIN1bkGmxnNEuyFPB3CuE6R1HeUoRKUZ_m7x_Vi6IdiLKtEZ-FjcpJKt2nV2N4nqa0_A1L4V-Xy1JLkVW7U96eGaDWVxCBDwpksdmKzVB1FYUwYQkY1fMj_B_kwc9vXmcVm92HFCMqXePM5qWJOwze23hHFYTOZ0gP7K01_MFI5Ibb4iNoLcAwtxMpxTycJTfi763W06MpFID4ILcj2LRD09sRB_upIEUV5OeaKSND12F5q0Qpw0vWxbI2XIU7ksodymFpdCHcTl52wEi8M0rTizwiM5NGltBPSgK_e1UWE-Kzm_PnPxdv-jNnNWAhBW-03B_HNURU0UP8p6a_oB3S1-W2TyLxC9D20XEm5hby7VHGyJptbQP-lYG9sMOgl4h_RZPLZtpLuC509XLjGR_SAL-YX5ZuQhT8N_nmEQ4_N8empTE6uMUhpXv7BuQv9-R3-jpvtdb6OzuQ7Xxso' \
+          -H 'cache-control: no-cache' \
+          -H 'content-type: application/x-www-form-urlencoded' \
+          -H 'postman-token: 0f845e44-21e4-8842-1c9f-de5a6e8205c9' \
           -d 'title=sdasd&note=asdsadasdadasdasdasdasdasd%20asd%20asdas%20da%20asd%20asd%20asdasd%20as%20dasd%20asd%20'
