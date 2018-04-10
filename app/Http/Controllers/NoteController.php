@@ -6,7 +6,6 @@ use App\Http\Requests\StoreNotes;
 use App\Note;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -17,8 +16,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-
-        //
+        //todo in real life we should use paginator
+        return Note::get();
     }
 
     /**
@@ -64,7 +63,7 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        //
+        return Note::findOrFail($id);
     }
 
     /**
@@ -87,7 +86,27 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        try {
+            $note = Note::findOrFail($id);
+
+            if (!is_null($request->input('title'))) {
+                $note->title = $request->input('title');
+            }
+
+            if (!is_null($request->input('note'))) {
+                $note->title = $request->input('note');
+            }
+
+            if(!$note->save()) {
+                throw new \Exception('Something went wrong');
+            }
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());die;
+        }
+
+
+        return new JsonResponse('Successfully Updated');
     }
 
     /**
@@ -96,8 +115,20 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, StoreNotes $request)
     {
-        //
+        try {
+            $note = Note::findOrFail($id);
+            if(!$note->delete()) {
+                throw new \Exception('Something went wrong');
+            }
+
+            return new JsonResponse('Successflly deleted');
+        } catch (\Exception $e) {
+            //todo in real life we should implement error response in all error cases which we show to end user
+            var_dump($e->getMessage());die;
+        }
+
+
     }
 }
