@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNotes;
+use App\Note;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
@@ -14,6 +17,7 @@ class NoteController extends Controller
      */
     public function index()
     {
+
         //
     }
 
@@ -35,7 +39,21 @@ class NoteController extends Controller
      */
     public function store(StoreNotes $request)
     {
-        //
+        try {
+            $note = new Note();
+            $note->title = $request->input('title');
+            $note->note = $request->input('note');
+            $note->user_id = $request->user()->id;
+
+            if (!$note->save()) {
+                throw new \Exception('Something went wrong');
+            }
+
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());die;
+        }
+
+        return new JsonResponse("Successfully Created", 201);
     }
 
     /**
