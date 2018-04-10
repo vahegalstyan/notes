@@ -57,3 +57,32 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+Installation
+
+composer install
+php artisan migrate
+
+php artisan passport:install
+
+php artisan db:seed --class=UsersTableSeeder
+
+//create password grant client
+
+php artisan passport:client --password
+
+//remember client id and client secret for future requests
+
+//login request change client id and client secret to yourse
+
+curl -X POST \
+  http://notes.loc/oauth/token \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
+  -H 'postman-token: ba49c0cc-fde9-5f76-7f47-186c1632bc84' \
+  -F grant_type=password \
+  -F client_id=3 \
+  -F client_secret=kll1pXQIC45BisOdRHHVxs2Fyz3jRf4FUEFAv0Mq \
+  -F username=test@gmail.com \
+  -F password=secretsecret \
+  -F 'scope=*'
