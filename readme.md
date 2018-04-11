@@ -87,7 +87,7 @@ php artisan passport:client --password
       -H 'postman-token: ba49c0cc-fde9-5f76-7f47-186c1632bc84' \
       -F grant_type=password \
       -F client_id=3 \
-      -F client_secret=kll1pXQIC45BisOdRHHVxs2Fyz3jRf4FUEFAv0Mq \
+      -F client_secret=l4os0v48m9nGvtXwyhuk0bFGjXDa9TbxXsP0Ldcx \
       -F username=test@gmail.com \
       -F password=secretsecret \
       -F 'scope=*'

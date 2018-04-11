@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNotes;
 use App\Note;
+use App\Services\NotesService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
+    /**
+     * @var NotesService
+     */
+    private $notesService;
+
+    public function __construct(NotesService $notesService)
+    {
+        $this->notesService = $notesService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +27,9 @@ class NoteController extends Controller
      */
     public function index()
     {
+        return $this->notesService->getAllNotes();
         //todo in real life we should use paginator
-        return Note::get();
+       
     }
 
     /**
@@ -39,17 +51,10 @@ class NoteController extends Controller
     public function store(StoreNotes $request)
     {
         try {
-            $note = new Note();
-            $note->title = $request->input('title');
-            $note->note = $request->input('note');
-            $note->user_id = $request->user()->id;
-
-            if (!$note->save()) {
-                throw new \Exception('Something went wrong');
-            }
-
+            $data = $request->all();
+            $this->notesService->createNote($request->user()->id, $data);
         } catch (\Exception $e) {
-            var_dump($e->getMessage());die;
+           return new JsonResponse($e->getMessage(), 500);
         }
 
         return new JsonResponse("Successfully Created", 201);
@@ -63,7 +68,7 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        return Note::findOrFail($id);
+        return $this->notesService->getNode($id);
     }
 
     /**
@@ -80,31 +85,16 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreNotes $request, $id)
     {
-
         try {
-            $note = Note::findOrFail($id);
-
-            if (!is_null($request->input('title'))) {
-                $note->title = $request->input('title');
-            }
-
-            if (!is_null($request->input('note'))) {
-                $note->title = $request->input('note');
-            }
-
-            if(!$note->save()) {
-                throw new \Exception('Something went wrong');
-            }
+            $this->notesService->updateNote($id, $request->all());
         } catch (\Exception $e) {
-            var_dump($e->getMessage());die;
+            return new JsonResponse($e->getMessage(), 500);
         }
-
 
         return new JsonResponse('Successfully Updated');
     }
@@ -118,17 +108,12 @@ class NoteController extends Controller
     public function destroy($id, StoreNotes $request)
     {
         try {
-            $note = Note::findOrFail($id);
-            if(!$note->delete()) {
-                throw new \Exception('Something went wrong');
-            }
+            $this->notesService->deleteNote($id);
 
-            return new JsonResponse('Successflly deleted');
         } catch (\Exception $e) {
-            //todo in real life we should implement error response in all error cases which we show to end user
-            var_dump($e->getMessage());die;
+            return new JsonResponse($e->getMessage(), 500);
         }
 
-
+        return new JsonResponse('Successfully deleted');
     }
 }
